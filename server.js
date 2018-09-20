@@ -12,7 +12,6 @@ var usersController = require('./controllers/users');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 
-
 app.all(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header('Access-Control-Allow-Methods', 'DELETE, PUT');
@@ -23,7 +22,6 @@ app.all(function (req, res, next) {
 var events = [];
 var restaurants = [];
 var users = [];
-
 
 app.get('/',function(req,res){
     res.send('Hello API');
@@ -40,12 +38,10 @@ app.get('/events',eventsController.all);
 app.get('/restaurants',restaurantsController.all);
 app.get('/users',usersController.all);
 
-
 //posts info to db
 app.post('/events',eventsController.create);
 app.post('/restaurants',restaurantsController.create);
 app.post('/users',usersController.create);
-
 
 //updates info in id's
 app.put('/events/:id',eventsController.update);
@@ -59,10 +55,9 @@ app.delete('/restaurants/:id',restaurantsController.delete);
 app.delete('/users/:id',usersController.delete);
 
 
-
 db.connect('mongodb://Admin:a12345@ds121251.mlab.com:21251/food-card',function (err) {
     if (err) {
         return console.log(err);
     }
-    app.listen(3000);
+    app.listen(process.env.PORT || 5000);
 });
