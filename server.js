@@ -64,5 +64,5 @@ db.connect('mongodb://Admin:a12345@ds121251.mlab.com:21251/food-card',function (
     if (err) {
         return console.log(err);
     }
-    app.listen(3000);
+    app.listen(process.env.PORT || 5000);
 });
